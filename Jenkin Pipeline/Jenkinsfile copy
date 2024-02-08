@@ -1,0 +1,45 @@
+pipeline {
+    
+    environment {
+        Azure_ACCESS_KEY_ID     = credentials('Azure_ACCESS_KEY')
+        Azure_SECRET_ACCESS_KEY = credentials('Azure_SECRET_KEY')
+    }
+
+   pipeline {
+    agent any
+    
+    stages {
+        stage ("checkout from GIT") {
+            steps {
+                git branch: 'main', url: 'https://github.com/lalitmahabhoi/Programming-code.git'
+               
+            }
+        }
+        stage ("terraform init") {
+            steps {
+                sh 'terraform init'
+            }
+        }
+        stage ("terraform fmt") {
+            steps {
+                sh 'terraform fmt'
+            }
+        }
+        stage ("terraform validate") {
+            steps {
+                sh 'terraform validate'
+            }
+        }
+        stage ("terrafrom plan") {
+            steps {
+                sh 'terraform plan '
+            }
+        }
+        stage ("terraform apply") {
+            steps {
+                sh 'terraform apply --auto-approve'
+            }
+        }
+    }
+}
+}    
