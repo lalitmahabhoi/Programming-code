@@ -3,6 +3,6 @@ terraform {
     bucket = "cloudservicenow"
     key = "main"
     region = "ap-south-1"
-    dynamodb_table = "CloudServiceNow"
+    # dynamodb_table = "CloudServiceNow"
   }
 }
